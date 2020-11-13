@@ -24,6 +24,7 @@ export const query = graphql`
 `
 
 export default ({ data }) => {
+  // TODO: deeplink the podcast
   return (
     <MDXProvider components={{ ...shortcodes }}>
       <SEO

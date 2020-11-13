@@ -2,6 +2,7 @@ import { graphql } from "gatsby"
 import React from "react"
 import EpisodeListing from "../components/EpisodeListing"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 export const query = graphql`
   query MyQuery {
@@ -21,10 +22,9 @@ export const query = graphql`
   }
 `
 let Episodes = ({ data }) => {
-  console.log(data)
-  console.log(data.allMdx.nodes)
   return (
     <Layout>
+      <SEO title={"Episodes"} />
       <h1>Episodes</h1>
       {data.allMdx.nodes.map(episode => (
         <EpisodeListing episode={episode} />

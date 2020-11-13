@@ -20,11 +20,11 @@ const Layout = ({ children }) => {
               hosts
             </a>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" href="{{ url('/register') }}">
+          {/* <li className="nav-item">
+            <Link className="nav-link" href="/contact">
               contact
             </Link>
-          </li>
+          </li> */}
         </ul>
         {/* </div> */}
       </nav>

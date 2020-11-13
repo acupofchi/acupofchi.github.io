@@ -58,13 +58,18 @@ exports.onPostBuild = async ({ graphql }) => {
   // TODO: need to update tyhese and maybe move to config
   let pluginOptions = {
     title: `A Cup of CHI`,
+    // TODO: Need to add this
     subtitle: ``,
+    // TODO:
     description: ``,
+    // TODO:
     summary: `Podcast summary`,
     podcastType: `episodic`,
-    siteUrl: `https://podcast.com`,
-    imageUrl: `https://podcast.com/podcast-image/png`,
-    feedUrl: `https://podcast.com/pocast-rss-feed.xml`,
+    // TODO:
+    siteUrl: `https://acupofchi.github.io/`,
+    // TODO: need an image for the podcast
+    imageUrl: `https://acupofchi.github.io/coverImage.png`,
+    feedUrl: `https://acupofchi.github.io/feed.xml`,
     language: `en-ca`,
     copyright: `Copyright © 2020 Blaine Lewis and Karthik Mahadevan`,
     authorName: `Blaine Lewis and Karthik Mahadevan`,
@@ -74,12 +79,11 @@ exports.onPostBuild = async ({ graphql }) => {
     webMaster: `acupofchipodcast@gmail.com`,
     explicit: `no`,
     publicationDate: `July 20, 2020 10:00:00 GMT`,
-    category1: `Arts`,
-    subCategory1: `Books`,
-    category2: `Education`,
-    subCategory2: `Courses`,
-    category3: `Business`,
-    subCategory3: `Marketing`,
+    // TODO: https://help.apple.com/itc/podcasts_connect/?lang=en#/itc9267a2f12
+    category1: `Science`,
+    category2: `Technology`,
+    category2: `Art`,
+    subCategory3: `Design`,
     timeToLive: `60`,
     outputPath: `/feed.xml`,
   }
@@ -324,8 +328,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const posts = result.data.allMdx.edges
   // you'll call `createPage` for each result
   posts.forEach(({ node }) => {
-    console.log(node.frontmatter.slug)
-
     createPage({
       // This is the slug you created before
       // (or `node.frontmatter.slug`)
