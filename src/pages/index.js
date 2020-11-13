@@ -15,8 +15,8 @@ export const query = graphql`
   query {
     banner: file(relativePath: { eq: "banner-tech.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 2000) {
-          ...GatsbyImageSharpFluid
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
@@ -55,15 +55,16 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO />
     <div className="banner">
-      <BackgroundImage
+      {/* <BackgroundImage
         className="banner"
         Tag="section"
         fluid={data.banner.childImageSharp.fluid}
         // TODO: better
         backgroundColor={`#040e18`}
-      >
+      > */}
+      <section className="banner">
+        {/* https://www.pexels.com/photo/high-angle-view-of-coffee-cup-on-table-317385/ */}
         <h1>
-          {/* Make this the accent colour */}
           Pour a cup <br />
           and take a seat.
         </h1>
@@ -74,12 +75,13 @@ const IndexPage = ({ data }) => (
           know (<i>hint: there's a guest on every episode</i>). We try to
           publish an episode every month.
         </p>
-      </BackgroundImage>
+      </section>
+      {/* </BackgroundImage> */}
     </div>
     <section>
-      <img src={ApplePodcasts} />
-      <img src={Spotify} />
-      <img src={GooglePodcasts} />
+      <img alt="Listen on Apple Podcasts" src={ApplePodcasts} />
+      <img alt="Listen on Spotify" src={Spotify} />
+      <img alt="Listen on Google Podcasts" src={GooglePodcasts} />
     </section>
     <section>
       <h2>Hosts</h2>
@@ -87,7 +89,10 @@ const IndexPage = ({ data }) => (
         <h3>Blaine Lewis</h3>
         <div>
           <div>
-            <Img fluid={data.blaine.childImageSharp.fluid} />
+            <Img
+              alt="Profile picture of Blaine"
+              fluid={data.blaine.childImageSharp.fluid}
+            />
           </div>
           <div>
             <p>
@@ -104,7 +109,10 @@ const IndexPage = ({ data }) => (
         <h3>Karthik Mahadevan</h3>
         <div>
           <div>
-            <Img fluid={data.karthik.childImageSharp.fluid} />
+            <Img
+              alt="Profile picture of Karthik"
+              fluid={data.karthik.childImageSharp.fluid}
+            />
           </div>
           <div>
             <p>

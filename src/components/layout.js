@@ -1,16 +1,38 @@
 import React from "react"
 import "./layout.css"
 
+import styled from "styled-components"
+
+import { Link } from "gatsby"
+
+let Header = styled.header`
+  height: 50px;
+  margin: auto;
+  max-width: 960px;
+  display: flex;
+`
+
+let Logo = styled.div`
+  flex: 1;
+  display: inline-block;
+`
+
+let Nav = styled.nav`
+  display: inline-block;
+`
+
 const Layout = ({ children }) => {
   return (
     <>
       <header>
-        A Cup of CHI
-        <nav>
+        <Logo>A Cup of CHI</Logo>
+        <Nav>
           <ul>
-            <li>episodes</li>
+            <li>
+              <Link to="/episodes">Episodes</Link>
+            </li>
           </ul>
-        </nav>
+        </Nav>
       </header>
 
       <main>{children}</main>
