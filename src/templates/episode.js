@@ -40,6 +40,7 @@ export default ({ data }) => {
           />
           Your browser does not support the audio element.
         </audio>
+        <div>{data.mdx.blurb}</div>
         <MDXRenderer>{data.mdx.body}</MDXRenderer>
       </Layout>
     </MDXProvider>

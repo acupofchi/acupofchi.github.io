@@ -1,15 +1,18 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import BackgroundImage from "gatsby-background-image"
 
 import GooglePodcasts from "../images/EN_Google_Podcasts_Badge.svg"
 import ApplePodcasts from "../images/spotify-podcast-badge-blk-grn-165x40.svg"
 import Spotify from "../images/US_UK_Apple_Podcasts_Listen_Badge_RGB.svg"
+
+import Placeholder from "../images/placeholder.png"
+
 // import logo from "../images/logo.svg"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import EpisodeListing from "../components/EpisodeListing"
 
 export const query = graphql`
   query {
@@ -44,6 +47,7 @@ export const query = graphql`
           slug
           subtitle
           title
+          publicationDate
         }
         excerpt
       }
@@ -54,20 +58,17 @@ export const query = graphql`
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO />
-    <div className="banner">
-      {/* <BackgroundImage
-        className="banner"
-        Tag="section"
-        fluid={data.banner.childImageSharp.fluid}
-        // TODO: better
-        backgroundColor={`#040e18`}
-      > */}
-      <section className="banner">
-        {/* https://www.pexels.com/photo/high-angle-view-of-coffee-cup-on-table-317385/ */}
-        <h1>
-          Pour a cup <br />
-          and take a seat.
-        </h1>
+
+    <section className="row">
+      <div className="col-xs-12 col-md-6">
+        <img
+          alt="A cup of chi logo"
+          className="img-responsive img-fluid"
+          src={Placeholder}
+        />
+      </div>
+      <div className="col-xs-12 col-md-6">
+        <h1>Pour a cup and take a seat.</h1>
         <p>
           We're going to shed some light on <b>Human Computer Interaction</b>.
           In this podcast we take a deep dive on specific topics in our overall
@@ -75,26 +76,37 @@ const IndexPage = ({ data }) => (
           know (<i>hint: there's a guest on every episode</i>). We try to
           publish an episode every month.
         </p>
-      </section>
-      {/* </BackgroundImage> */}
-    </div>
-    <section>
-      <img alt="Listen on Apple Podcasts" src={ApplePodcasts} />
-      <img alt="Listen on Spotify" src={Spotify} />
-      <img alt="Listen on Google Podcasts" src={GooglePodcasts} />
+        <div className="row">
+          <img
+            className="col"
+            alt="Listen on Apple Podcasts"
+            src={ApplePodcasts}
+          />
+          <img className="col" alt="Listen on Spotify" src={Spotify} />
+          <img
+            className="col"
+            alt="Listen on Google Podcasts"
+            src={GooglePodcasts}
+          />
+        </div>
+      </div>
     </section>
-    <section>
-      <h2>Hosts</h2>
-      <div>
-        <h3>Blaine Lewis</h3>
-        <div>
-          <div>
+
+    <section className="mt-5 mb-3 px-md-5">
+      <h2 className="text-center display-4 mb-3" id="hosts">
+        Hosts
+      </h2>
+      <div className="container-sm">
+        <div className="row mb-3">
+          <div className="col-xs-12 col-md-4">
             <Img
+              className="rounded"
               alt="Profile picture of Blaine"
               fluid={data.blaine.childImageSharp.fluid}
             />
           </div>
-          <div>
+          <div className="col-xs-12 col-md-8">
+            <h3>Blaine Lewis</h3>
             <p>
               Most of my research looks at how we can design interfaces that
               prioritise productivity rather than ease of use. Surprisingly
@@ -104,35 +116,31 @@ const IndexPage = ({ data }) => (
             <a href="http://blainelewis.ca">blainelewis.ca</a>
           </div>
         </div>
-      </div>
-      <div>
-        <h3>Karthik Mahadevan</h3>
-        <div>
-          <div>
+        <div className="row">
+          <div className="col-xs-12 col-md-4 order-xs-first order-md-last">
             <Img
+              className="rounded"
               alt="Profile picture of Karthik"
               fluid={data.karthik.childImageSharp.fluid}
             />
           </div>
-          <div>
+          <div className="col-xs-12 col-md-8 ">
+            <h3>Karthik Mahadevan</h3>
             <p>
               Karthik researchers Human Robot Interaction. Currently his
               research is focused on improving the way
             </p>
-            <a href="http://blainelewis.ca">blainelewis.ca</a>
           </div>
         </div>
       </div>
     </section>
-    <section>
-      {data.recentEpisodes.nodes.map(episode => (
-        <div>
-          <Link to={episode.frontmatter.slug}>
-            <h3>{episode.frontmatter.title}</h3>
-          </Link>
-          <p>{episode.excerpt}</p>
-        </div>
-      ))}
+    <section className="">
+      <h2 className="text-center display-4 mb-3">Episodes</h2>
+      <div className="row">
+        {data.recentEpisodes.nodes.map(episode => (
+          <EpisodeListing episode={episode} />
+        ))}
+      </div>
     </section>
   </Layout>
 )

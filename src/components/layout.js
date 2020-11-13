@@ -1,43 +1,35 @@
 import React from "react"
-import "./layout.css"
-
-import styled from "styled-components"
 
 import { Link } from "gatsby"
 
-let Header = styled.header`
-  height: 50px;
-  margin: auto;
-  max-width: 960px;
-  display: flex;
-`
-
-let Logo = styled.div`
-  flex: 1;
-  display: inline-block;
-`
-
-let Nav = styled.nav`
-  display: inline-block;
-`
-
 const Layout = ({ children }) => {
   return (
-    <>
-      <header>
-        <Logo>A Cup of CHI</Logo>
-        <Nav>
-          <ul>
-            <li>
-              <Link to="/episodes">Episodes</Link>
-            </li>
-          </ul>
-        </Nav>
-      </header>
-
+    <div className="container">
+      <nav className="navbar navbar-expand-md navbar-light bg-white">
+        <a className="navbar-brand mr-auto" href="/">
+          a cup of chi
+        </a>
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link className="nav-link" href="/episodes">
+              episodes
+            </Link>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/#hosts">
+              hosts
+            </a>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" href="{{ url('/register') }}">
+              contact
+            </Link>
+          </li>
+        </ul>
+        {/* </div> */}
+      </nav>
       <main>{children}</main>
-      <footer></footer>
-    </>
+    </div>
   )
 }
 
