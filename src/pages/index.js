@@ -8,8 +8,6 @@ import ApplePodcasts from "../images/US_UK_Apple_Podcasts_Listen_Badge_RGB.svg"
 
 import Thumbnail from "../images/thumbnail.svg"
 
-// import logo from "../images/logo.svg"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import EpisodeListing from "../components/EpisodeListing"
@@ -69,7 +67,7 @@ const IndexPage = ({ data }) => (
       </div>
       <div className="md:px-4 lg:py-0 py-2">
         {/* gradient for the big text maybe? text-transparent bg-gradient-to-br to-logo-white bg-clip-text from-logo-brown */}
-        <h1 className="text-logo-brown  text-5xl md:text-7xl  font-bold mb-4">
+        <h1 className="text-logo-red  text-5xl md:text-7xl  font-bold mb-4">
           Pour a cup and take a seat.
         </h1>
         <p className="mb-4 text-lg">

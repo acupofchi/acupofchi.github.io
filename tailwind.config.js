@@ -4,13 +4,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        cursive: ["Pacifico"],
+        cursive: ["Sacramento"],
       },
       colors: {
         logo: {
           red: "#f67944",
           white: "#fbfbfb",
-          brown: "#c7943e",
+          brown: "#B89958",
           blue: "#2677bb",
         },
       },

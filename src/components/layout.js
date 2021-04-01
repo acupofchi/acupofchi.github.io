@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
       <nav>
         <ul className="flex space-x-4 justify-items-center items-center">
           <li className="flex-1">
-            <Link className="font-cursive text-logo-brown text-lg" to="/">
+            <Link className="font-cursive text-logo-brown text-3xl" to="/">
               a{" "}
               <svg
                 className="inline w-6 h-6 fill-current text-logo-red"
