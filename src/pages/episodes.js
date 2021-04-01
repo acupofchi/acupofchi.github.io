@@ -27,7 +27,7 @@ let Episodes = ({ data }) => {
       <SEO title={"Episodes"} />
       <h1 className="mt-12 mb-4 text-logo-blue font-bold text-3xl">Episodes</h1>
       {data.allMdx.nodes.map(episode => (
-        <EpisodeListing episode={episode} />
+        <EpisodeListing key={episode.frontmatter.title} episode={episode} />
       ))}
     </Layout>
   )

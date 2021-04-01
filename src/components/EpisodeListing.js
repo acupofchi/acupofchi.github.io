@@ -8,7 +8,6 @@ const EpisodeListing = ({
     excerpt,
   },
 }) => {
-  console.log(new Date(publicationDate))
   publicationDate = new Date(publicationDate)
   return (
     <div>

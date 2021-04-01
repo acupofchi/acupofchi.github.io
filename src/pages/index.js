@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import GooglePodcasts from "../images/EN_Google_Podcasts_Badge.svg"
-import ApplePodcasts from "../images/spotify-podcast-badge-blk-grn-165x40.svg"
-import Spotify from "../images/US_UK_Apple_Podcasts_Listen_Badge_RGB.svg"
+import Spotify from "../images/spotify-podcast-badge-blk-grn-165x40.svg"
+import ApplePodcasts from "../images/US_UK_Apple_Podcasts_Listen_Badge_RGB.svg"
 
 import Thumbnail from "../images/thumbnail.svg"
 
@@ -24,7 +24,7 @@ export const query = graphql`
       }
     }
 
-    blaine: file(relativePath: { eq: "blaine.jpg" }) {
+    blaine: file(relativePath: { eq: "blaineheadshot.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 400, maxHeight: 400) {
           ...GatsbyImageSharpFluid
@@ -63,12 +63,12 @@ const IndexPage = ({ data }) => (
       <div>
         <img
           alt="A cup of chi logo"
-          className="img-responsive img-fluid rounded-2xl"
+          className="img-responsive img-fluid rounded-2xl shadow-lg"
           src={Thumbnail}
         />
       </div>
-      <div className="p-4">
-        <h1 className="text-7xl text-logo-red font-bold mb-4">
+      <div className="md:px-4 lg:py-0 py-2">
+        <h1 className="text-5xl md:text-7xl text-logo-red font-bold mb-4">
           Pour a cup and take a seat.
         </h1>
         <p className="mb-4 text-lg">
@@ -78,18 +78,27 @@ const IndexPage = ({ data }) => (
           know (<i>hint: there's a guest on every episode</i>). We try to
           publish an episode every month.
         </p>
-        <div className="flex justify-center space-x-2">
-          <img
-            className="col"
-            alt="Listen on Apple Podcasts"
-            src={ApplePodcasts}
-          />
-          <img className="col" alt="Listen on Spotify" src={Spotify} />
-          <img
-            className="col"
-            alt="Listen on Google Podcasts"
-            src={GooglePodcasts}
-          />
+        <div className="gap-2 md:grid grid-cols-3 space-y-4 md:space-y-0 p-8 md:p-0">
+          <a className="block" href="">
+            <img
+              className="w-full"
+              alt="Listen on Apple Podcasts"
+              src={ApplePodcasts}
+            />
+          </a>
+          <a
+            className="block"
+            href="https://open.spotify.com/show/4qCp2enpMJiosJP5zHkc2W"
+          >
+            <img className="w-full" alt="Listen on Spotify" src={Spotify} />
+          </a>
+          <a className="block" href="">
+            <img
+              className="w-full"
+              alt="Listen on Google Podcasts"
+              src={GooglePodcasts}
+            />
+          </a>
         </div>
       </div>
     </section>
@@ -98,13 +107,13 @@ const IndexPage = ({ data }) => (
       <div className="text-center lg:mb mb-8">
         <div className="w-80 h-80 mx-auto mb-6">
           <Img
-            className="rounded-full"
+            className="rounded-md shadow-lg"
             alt="Profile picture of Blaine"
             fluid={data.blaine.childImageSharp.fluid}
           />
         </div>
         <h3 className="mb-2 text-3xl font-bold text-logo-blue">Blaine Lewis</h3>
-        <p className="text-justify px-10 ">
+        <p className="text-justify md:px-10 ">
           Blaine is a PhD student at the University of Toronto. On the podcast
           he often references his research pertaining to how software users
           become experts. To find interactive demos of his research and other
@@ -118,7 +127,7 @@ const IndexPage = ({ data }) => (
       <div className="text-center ">
         <div className="w-80 h-80 mx-auto mb-6">
           <Img
-            className="rounded-full"
+            className="rounded-md shadow-lg"
             alt="Profile picture of Blaine"
             fluid={data.karthik.childImageSharp.fluid}
           />
@@ -126,7 +135,7 @@ const IndexPage = ({ data }) => (
         <h3 className="mb-2 text-3xl font-bold text-logo-blue">
           Karthik Mahadevan
         </h3>
-        <p className="px-10 text-justify">
+        <p className="md:px-10 text-justify">
           Karthik Mahadevan is a PhD student in Computer Science at the
           University of Toronto, where he is supervised by Dr. Tovi Grossman and
           Dr. Anthony Tang. He is passionate about how we can design systems and
@@ -143,7 +152,7 @@ const IndexPage = ({ data }) => (
       <h2 className="text-2xl font-bold">Episodes</h2>
       <div className="row">
         {data.recentEpisodes.nodes.map(episode => (
-          <EpisodeListing episode={episode} />
+          <EpisodeListing key={episode.frontmatter.title} episode={episode} />
         ))}
       </div>
     </section>

@@ -1,11 +1,10 @@
 import React from "react"
 
 import { Link } from "gatsby"
-import Logo from "../images/favicon.svg"
 
 const Layout = ({ children }) => {
   return (
-    <div className="xl:mx-auto max-w-6xl mt-4 mx-10">
+    <div className="xl:mx-auto max-w-6xl mt-4 mx-4">
       <nav>
         <ul className="flex space-x-4">
           <li className="flex-1">
@@ -30,7 +29,7 @@ const Layout = ({ children }) => {
             </Link>
           </li>
           <li className="">
-            <Link className="" to="/episodes">
+            <Link className="text-gray-500" to="/episodes">
               episodes
             </Link>
           </li>

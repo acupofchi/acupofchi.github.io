@@ -53,7 +53,11 @@ const wrapper = promise =>
 //  - gatsby-config for the overall podcast itself, and
 //  - individual mdx files for each episode.
 // Output the feed to a local file.
-exports.onPostBuild = async ({ graphql }) => {
+// exports.createPages = async ({ graphql }) => {
+
+// }
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
   // get the options for the podcast iteself
   // TODO: need to update tyhese and maybe move to config
   let pluginOptions = {
@@ -61,24 +65,24 @@ exports.onPostBuild = async ({ graphql }) => {
     // TODO: Need to add this
     subtitle: ``,
     // TODO:
-    description: ``,
+    description: `A Cup of CHI is a podcast where guests are invited to speak about their research in the area of human computer interaction.`,
     // TODO:
-    summary: `Podcast summary`,
+    summary: `A Cup of CHI is a podcast where guests are invited to speak about their research in the area of human computer interaction.`,
     podcastType: `episodic`,
     // TODO:
     siteUrl: `https://acupofchi.github.io/`,
     // TODO: need an image for the podcast
-    imageUrl: `https://acupofchi.github.io/coverImage.png`,
+    imageUrl: `https://acupofchi.github.io/thumbnail.png`,
     feedUrl: `https://acupofchi.github.io/feed.xml`,
     language: `en-ca`,
-    copyright: `Copyright © 2020 Blaine Lewis and Karthik Mahadevan`,
+    copyright: `Copyright © 2021 Blaine Lewis and Karthik Mahadevan`,
     authorName: `Blaine Lewis and Karthik Mahadevan`,
     ownerName: `Blaine Lewis and Karthik Mahadevan`,
     ownerEmail: `acupofchipodcast@gmail.com`,
     managingEditor: `acupofchipodcast@gmail.com`,
     webMaster: `acupofchipodcast@gmail.com`,
     explicit: `no`,
-    publicationDate: `July 20, 2020 10:00:00 GMT`,
+    publicationDate: `March 31, 2021 10:00:00 GMT`,
     // TODO: https://help.apple.com/itc/podcasts_connect/?lang=en#/itc9267a2f12
     category1: `Science`,
     category2: `Technology`,
@@ -191,7 +195,7 @@ exports.onPostBuild = async ({ graphql }) => {
   const feed = new RSS(feedOptions)
 
   // get the options for the episodes
-  const result = await wrapper(
+  let result = await wrapper(
     graphql(`
       query {
         podcastEpisodes: allMdx(
@@ -251,7 +255,7 @@ exports.onPostBuild = async ({ graphql }) => {
       source: {
         childMp3: { duration },
         size,
-        publicURL: url,
+        publicURL,
       },
       explicit,
       categories,
@@ -263,7 +267,7 @@ exports.onPostBuild = async ({ graphql }) => {
       title,
       date: publicationDate,
       description: excerpt,
-      url: pluginOptions.siteUrl + slug,
+      url: new URL(slug, pluginOptions.siteUrl).href,
       categories,
       author: author,
       custom_elements: [
@@ -287,13 +291,12 @@ exports.onPostBuild = async ({ graphql }) => {
         { "googleplay:explicit": explicit },
       ],
       enclosure: {
-        url,
+        url: new URL(publicURL, pluginOptions.siteUrl).href,
         size,
         type: "audio/mpeg",
       },
     })
   })
-
   // write the rss out to a file
   const publicPath = `./public`
   const outputPath = path.join(publicPath, pluginOptions.outputPath)
@@ -302,12 +305,10 @@ exports.onPostBuild = async ({ graphql }) => {
     await fs.mkdirp(outputDir)
   }
   await fs.writeFile(outputPath, feed.xml())
-}
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
   // Destructure the createPage function from the actions object
   const { createPage } = actions
-  const result = await graphql(`
+  result = await graphql(`
     query {
       allMdx {
         edges {
