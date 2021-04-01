@@ -33,16 +33,20 @@ export default ({ data }) => {
         canonical={data.mdx.frontmatter.slug}
       />
       <Layout>
-        <h1>{data.mdx.frontmatter.title}</h1>
-        <audio controls>
-          <source
-            src={data.mdx.frontmatter.source.publicURL}
-            type="audio/mpeg"
-          />
-          Your browser does not support the audio element.
-        </audio>
-        <div>{data.mdx.blurb}</div>
-        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+        <h1 className="mt-10 mb-8 text-logo-brown font-bold text-5xl">
+          {data.mdx.frontmatter.title}
+        </h1>
+        <div className="prose lg:prose-xl">
+          <blockquote>{data.mdx.excerpt}</blockquote>
+          <audio controls className="w-full">
+            <source
+              src={data.mdx.frontmatter.source.publicURL}
+              type="audio/mpeg"
+            />
+            Your browser does not support the audio element.
+          </audio>
+          <MDXRenderer>{data.mdx.body}</MDXRenderer>
+        </div>
       </Layout>
     </MDXProvider>
   )

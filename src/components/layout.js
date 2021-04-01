@@ -6,12 +6,13 @@ const Layout = ({ children }) => {
   return (
     <div className="xl:mx-auto max-w-6xl mt-4 mx-4">
       <nav>
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-4 justify-items-center items-center">
           <li className="flex-1">
             <Link className="font-cursive text-logo-brown text-lg" to="/">
               a{" "}
               <svg
                 className="inline w-6 h-6 fill-current text-logo-red"
+                style={{ marginRight: "-2.5px", marginLeft: "-2px" }}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 764.16 764.16"
               >

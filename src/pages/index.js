@@ -68,7 +68,8 @@ const IndexPage = ({ data }) => (
         />
       </div>
       <div className="md:px-4 lg:py-0 py-2">
-        <h1 className="text-5xl md:text-7xl text-logo-red font-bold mb-4">
+        {/* gradient for the big text maybe? text-transparent bg-gradient-to-br to-logo-white bg-clip-text from-logo-brown */}
+        <h1 className="text-logo-brown  text-5xl md:text-7xl  font-bold mb-4">
           Pour a cup and take a seat.
         </h1>
         <p className="mb-4 text-lg">
@@ -112,7 +113,7 @@ const IndexPage = ({ data }) => (
             fluid={data.blaine.childImageSharp.fluid}
           />
         </div>
-        <h3 className="mb-2 text-3xl font-bold text-logo-blue">Blaine Lewis</h3>
+        <h3 className="mb-2 text-3xl font-bold text-logo-red">Blaine Lewis</h3>
         <p className="text-justify md:px-10 ">
           Blaine is a PhD student at the University of Toronto. On the podcast
           he often references his research pertaining to how software users
@@ -132,7 +133,7 @@ const IndexPage = ({ data }) => (
             fluid={data.karthik.childImageSharp.fluid}
           />
         </div>
-        <h3 className="mb-2 text-3xl font-bold text-logo-blue">
+        <h3 className="mb-2 text-3xl font-bold text-logo-red">
           Karthik Mahadevan
         </h3>
         <p className="md:px-10 text-justify">
@@ -148,7 +149,7 @@ const IndexPage = ({ data }) => (
         </p>
       </div>
     </section>
-    <section className="mt-12">
+    <section className="mt-16 max-w-4xl mx-auto mb-20">
       <h2 className="text-2xl font-bold">Episodes</h2>
       <div className="row">
         {data.recentEpisodes.nodes.map(episode => (

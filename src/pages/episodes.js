@@ -25,10 +25,14 @@ let Episodes = ({ data }) => {
   return (
     <Layout>
       <SEO title={"Episodes"} />
-      <h1 className="mt-12 mb-4 text-logo-blue font-bold text-3xl">Episodes</h1>
-      {data.allMdx.nodes.map(episode => (
-        <EpisodeListing key={episode.frontmatter.title} episode={episode} />
-      ))}
+      <section className="mt-16 max-w-4xl mx-auto mb-20">
+        <h2 className="text-5xl mb-8 text-logo-brown font-bold">Episodes</h2>
+        <div className="row">
+          {data.allMdx.nodes.map(episode => (
+            <EpisodeListing key={episode.frontmatter.title} episode={episode} />
+          ))}
+        </div>
+      </section>
     </Layout>
   )
 }
