@@ -1,3 +1,4 @@
+import { formatDistance } from "date-fns"
 import { Link } from "gatsby"
 import React from "react"
 
@@ -7,12 +8,16 @@ const EpisodeListing = ({
     excerpt,
   },
 }) => {
+  console.log(new Date(publicationDate))
+  publicationDate = new Date(publicationDate)
   return (
     <div>
-      <h3>
+      <h3 className="text-lg font-medium inline mr-2">
         <Link to={slug}>{title}</Link>
       </h3>
-      <p>{publicationDate}</p>
+      <span className="inline  italic text-gray-600">
+        {formatDistance(publicationDate, new Date(), { addSuffix: true })}
+      </span>
       <div>
         <p>{excerpt}</p>
       </div>

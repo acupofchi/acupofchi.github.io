@@ -82,7 +82,7 @@ exports.onPostBuild = async ({ graphql }) => {
     // TODO: https://help.apple.com/itc/podcasts_connect/?lang=en#/itc9267a2f12
     category1: `Science`,
     category2: `Technology`,
-    category2: `Art`,
+    category3: `Art`,
     subCategory3: `Design`,
     timeToLive: `60`,
     outputPath: `/feed.xml`,
