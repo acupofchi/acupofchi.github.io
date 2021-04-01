@@ -78,7 +78,10 @@ const IndexPage = ({ data }) => (
           publish an episode every month.
         </p>
         <div className="gap-2 md:grid grid-cols-3 space-y-4 md:space-y-0 p-8 md:p-0">
-          <a className="block" href="">
+          <a
+            className="block"
+            href="https://podcasts.apple.com/ca/podcast/a-cup-of-chi/id1561081322"
+          >
             <img
               className="w-full"
               alt="Listen on Apple Podcasts"
