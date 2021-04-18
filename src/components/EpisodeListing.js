@@ -14,7 +14,7 @@ const EpisodeListing = ({
       <h3 className="text-lg font-medium inline mr-2">
         <Link to={slug}>{title}</Link>
       </h3>
-      <span className="inline  italic text-gray-600">
+      <span className="inline italic text-gray-600">
         {formatDistance(publicationDate, new Date(), { addSuffix: true })}
       </span>
       <div>

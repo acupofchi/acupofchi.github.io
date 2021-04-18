@@ -8,10 +8,13 @@ const Layout = ({ children }) => {
       <nav>
         <ul className="flex space-x-4 justify-items-center items-center">
           <li className="flex-1">
-            <Link className="font-cursive text-logo-brown text-3xl" to="/">
+            <Link
+              className="group font-cursive text-logo-brown text-3xl"
+              to="/"
+            >
               a{" "}
               <svg
-                className="inline w-6 h-6 fill-current text-logo-red"
+                className="group-hover:rotate-12 transform transition-transform inline w-6 h-6 fill-current text-logo-red ease-out"
                 style={{ marginRight: "-2.5px", marginLeft: "-2px" }}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 764.16 764.16"

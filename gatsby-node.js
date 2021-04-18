@@ -1,45 +1,39 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
-var mp3Duration = require("mp3-duration")
+const mp3Duration = require("mp3-duration")
 const RSS = require("rss")
 const path = require("path")
 const fs = require("fs-extra")
 
 exports.onCreateNode = async (...args) => {
   let { node } = args[0]
+
   if (node.extension === `mp3`) {
     return onCreateMp3Node(...args)
   }
 }
+
 let onCreateMp3Node = async ({
   node,
   actions: { createNode, createParentChildLink },
   createNodeId,
   createContentDigest,
-}) =>
-  // options
-  {
-    const duration = await mp3Duration(node.absolutePath)
-    let obj = { duration }
+}) => {
+  const duration = await mp3Duration(node.absolutePath)
+  let obj = { duration }
 
-    let mp3Node = {
-      ...obj,
-      id: createNodeId(`${node.id} >>> MP3`),
-      parent: node.id,
-      children: [],
-      internal: {
-        contentDigest: createContentDigest(obj),
-        type: `Mp3`,
-      },
-    }
-    createNode(mp3Node)
-    createParentChildLink({ parent: node, child: mp3Node })
+  let mp3Node = {
+    ...obj,
+    id: createNodeId(`${node.id} >>> MP3`),
+    parent: node.id,
+    children: [],
+    internal: {
+      contentDigest: createContentDigest(obj),
+      type: `Mp3`,
+    },
   }
+
+  createNode(mp3Node)
+  createParentChildLink({ parent: node, child: mp3Node })
+}
 
 const wrapper = promise =>
   promise.then(result => {
@@ -49,29 +43,24 @@ const wrapper = promise =>
     return result
   })
 
-// Create an rss feed for our podcast based on options from:
-//  - gatsby-config for the overall podcast itself, and
-//  - individual mdx files for each episode.
-// Output the feed to a local file.
-// exports.createPages = async ({ graphql }) => {
+/**
+ * This function builds on the podcast plugin in a few ways. It automatically adds the mp3 duration to all of the files in the above function, it also creates the feed.xml during development.
+ *
+ * https://github.com/miller-productions/gatsby-plugin-podcast-feed-mdx
+ *
+ *
+ */
 
-// }
-
-exports.createPages = async ({ graphql, actions, reporter }) => {
+async function createFeedXml(graphql) {
   // get the options for the podcast iteself
-  // TODO: need to update tyhese and maybe move to config
   let pluginOptions = {
     title: `A Cup of CHI`,
     // TODO: Need to add this
     subtitle: ``,
-    // TODO:
     description: `A Cup of CHI is a podcast where guests are invited to speak about their research in the area of human computer interaction.`,
-    // TODO:
     summary: `A Cup of CHI is a podcast where guests are invited to speak about their research in the area of human computer interaction.`,
     podcastType: `episodic`,
-    // TODO:
     siteUrl: `https://acupofchi.github.io/`,
-    // TODO: need an image for the podcast
     imageUrl: `https://acupofchi.github.io/thumbnail.png`,
     feedUrl: `https://acupofchi.github.io/feed.xml`,
     language: `en-ca`,
@@ -236,6 +225,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     `)
   )
+
   const episodes = result.data.podcastEpisodes.edges
 
   // for each episode
@@ -297,15 +287,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
+
   // write the rss out to a file
   const publicPath = `./public`
   const outputPath = path.join(publicPath, pluginOptions.outputPath)
   const outputDir = path.dirname(outputPath)
+
   if (!(await fs.exists(outputDir))) {
     await fs.mkdirp(outputDir)
   }
-  await fs.writeFile(outputPath, feed.xml())
 
+  await fs.writeFile(outputPath, feed.xml())
+}
+
+async function createMdxPages(graphql, actions, reporter) {
   // Destructure the createPage function from the actions object
   const { createPage } = actions
   result = await graphql(`
@@ -322,9 +317,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `)
+
   if (result.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
   }
+
   // Create blog post pages.
   const posts = result.data.allMdx.edges
   // you'll call `createPage` for each result
@@ -340,4 +337,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: { id: node.id },
     })
   })
+}
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  await createFeedXml(graphql)
+  await createMdxPages(graphql, actions, reporter)
 }

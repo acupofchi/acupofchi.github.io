@@ -23,7 +23,7 @@ export const query = graphql`
   }
 `
 
-export default ({ data }) => {
+const Episode = ({ data }) => {
   // TODO: deeplink the podcast
   return (
     <MDXProvider components={{ ...shortcodes }}>
@@ -51,3 +51,5 @@ export default ({ data }) => {
     </MDXProvider>
   )
 }
+
+export default Episode
