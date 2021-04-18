@@ -3,6 +3,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+// TODO: a cute notfound image would be nice.
 const NotFoundPage = () => (
   <Layout>
     <SEO title="404: Not found" />

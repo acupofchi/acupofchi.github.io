@@ -21,6 +21,7 @@ export const query = graphql`
     }
   }
 `
+
 let Episodes = ({ data }) => {
   return (
     <Layout>

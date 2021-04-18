@@ -57,10 +57,6 @@ const IndexPage = ({ data }) => (
 
     <section className="lg:grid grid-cols-2 mt-8 gap-4">
       <div>
-        {/* <Thumbnail
-          className="img-responsive img-fluid rounded-2xl shadow-lg"
-          title="A cup of chi logo"
-        /> */}
         <svg
           id="Layer_1"
           className="img-responsive img-fluid rounded-2xl shadow-lg"
@@ -100,11 +96,6 @@ const IndexPage = ({ data }) => (
             a cup of chi
           </text>
         </svg>
-        {/* <img
-          alt="A cup of chi logo"
-          className="img-responsive img-fluid rounded-2xl shadow-lg"
-          src={Thumbnail}
-        /> */}
       </div>
       <div className="md:px-4 lg:py-0 py-2">
         {/* gradient for the big text maybe? text-transparent bg-gradient-to-br to-logo-white bg-clip-text from-logo-brown */}
